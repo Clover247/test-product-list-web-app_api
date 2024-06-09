@@ -12,7 +12,13 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-connectDB();
+connectDB()
+  .then(() => {
+    console.log("MongoDB connected");
+  })
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+  });
 
 app.use("/products", productRoutes);
 
